@@ -1,0 +1,281 @@
+@import "tailwindcss";
+@import "tw-animate-css";
+
+@custom-variant dark (&:is(.dark *));
+
+:root {
+  /* Updated design tokens with prettier purple primary color */
+  --background: #ffffff; /* Pure white background */
+  --foreground: #0f172a; /* Dark slate for headers */
+  --card: #ffffff; /* White card background */
+  --card-foreground: #475569; /* Neutral gray for body text */
+  --popover: #ffffff; /* White popover background */
+  --popover-foreground: #475569; /* Neutral gray popover text */
+  --primary: #8b5cf6; /* Beautiful violet purple primary */
+  --primary-foreground: #ffffff; /* White text on primary */
+  --secondary: #f8fafc; /* Very light gray secondary */
+  --secondary-foreground: #475569; /* Neutral gray secondary text */
+  --muted: #f1f5f9; /* Light gray muted */
+  --muted-foreground: #64748b; /* Slightly darker muted text */
+  --accent: #8b5cf6; /* Violet purple accent */
+  --accent-foreground: #ffffff; /* White accent text */
+  --destructive: #ef4444; /* Rose for errors */
+  --destructive-foreground: #ffffff; /* White destructive text */
+  --border: #e2e8f0; /* Light border */
+  --input: #ffffff; /* White input background */
+  --ring: #8b5cf6; /* Violet purple ring */
+  --success: #10b981; /* Emerald for success */
+  --warning: #f59e0b; /* Amber for warning */
+  --chart-1: #8b5cf6; /* Violet purple for charts */
+  --chart-2: #10b981; /* Emerald for charts */
+  --chart-3: #f59e0b; /* Amber for charts */
+  --chart-4: #ef4444; /* Rose for charts */
+  --chart-5: #d946ef; /* Fuchsia accent */
+  --radius: 1rem; /* Updated to rounded-2xl */
+  --sidebar: #ffffff; /* White sidebar */
+  --sidebar-foreground: #475569; /* Neutral gray sidebar text */
+  --sidebar-primary: #8b5cf6; /* Violet purple sidebar primary */
+  --sidebar-primary-foreground: #ffffff; /* White sidebar primary text */
+  --sidebar-accent: #f1f5f9; /* Light gray sidebar accent */
+  --sidebar-accent-foreground: #475569; /* Neutral gray sidebar accent text */
+  --sidebar-border: #e2e8f0; /* Light sidebar border */
+  --sidebar-ring: #8b5cf6; /* Violet purple sidebar ring */
+}
+
+.dark {
+  --background: #0f172a;
+  --foreground: #f8fafc;
+  --card: #1e293b;
+  --card-foreground: #f8fafc;
+  --popover: #1e293b;
+  --popover-foreground: #f8fafc;
+  --primary: #8b5cf6;
+  --primary-foreground: #ffffff;
+  --secondary: #334155;
+  --secondary-foreground: #f8fafc;
+  --muted: #334155;
+  --muted-foreground: #94a3b8;
+  --accent: #8b5cf6;
+  --accent-foreground: #ffffff;
+  --destructive: #ef4444;
+  --destructive-foreground: #ffffff;
+  --border: #334155;
+  --input: #334155;
+  --ring: #8b5cf6;
+  --success: #10b981;
+  --warning: #f59e0b;
+  --chart-1: #8b5cf6;
+  --chart-2: #10b981;
+  --chart-3: #f59e0b;
+  --chart-4: #ef4444;
+  --chart-5: #d946ef;
+  --sidebar: #1e293b;
+  --sidebar-foreground: #f8fafc;
+  --sidebar-primary: #8b5cf6;
+  --sidebar-primary-foreground: #ffffff;
+  --sidebar-accent: #334155;
+  --sidebar-accent-foreground: #f8fafc;
+  --sidebar-border: #334155;
+  --sidebar-ring: #8b5cf6;
+}
+
+@theme inline {
+  --font-sans: var(--font-geist-sans);
+  --font-mono: var(--font-geist-mono);
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-destructive: var(--destructive);
+  --color-destructive-foreground: var(--destructive-foreground);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+  --color-success: var(--success);
+  --color-warning: var(--warning);
+  --color-chart-1: var(--chart-1);
+  --color-chart-2: var(--chart-2);
+  --color-chart-3: var(--chart-3);
+  --color-chart-4: var(--chart-4);
+  --color-chart-5: var(--chart-5);
+  --radius-sm: calc(var(--radius) - 4px);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) + 4px);
+  --color-sidebar: var(--sidebar);
+  --color-sidebar-foreground: var(--sidebar-foreground);
+  --color-sidebar-primary: var(--sidebar-primary);
+  --color-sidebar-primary-foreground: var(--sidebar-primary-foreground);
+  --color-sidebar-accent: var(--sidebar-accent);
+  --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
+  --color-sidebar-border: var(--sidebar-border);
+  --color-sidebar-ring: var(--sidebar-ring);
+}
+
+@layer base {
+  * {
+    @apply border-border outline-ring/50;
+  }
+  body {
+    @apply bg-background text-foreground font-sans;
+    background: radial-gradient(
+        300px circle at var(--mouse-x, 50%) var(--mouse-y, 50%),
+        rgba(139, 92, 246, 0.08) 0%,
+        rgba(168, 85, 247, 0.06) 25%,
+        rgba(217, 70, 239, 0.04) 50%,
+        transparent 75%
+      ), #ffffff;
+    transition: background 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
+  /* Added typography hierarchy */
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    @apply text-foreground font-semibold;
+  }
+
+  p,
+  span,
+  div {
+    @apply text-card-foreground font-normal;
+  }
+
+  .text-label {
+    @apply font-medium;
+  }
+}
+
+/* Updated interactive effects with new color scheme and rounded-2xl styling */
+@layer utilities {
+  .mouse-gradient {
+    background: radial-gradient(
+        250px circle at var(--mouse-x, 50%) var(--mouse-y, 50%),
+        rgba(139, 92, 246, 0.06) 0%,
+        rgba(168, 85, 247, 0.04) 30%,
+        rgba(217, 70, 239, 0.03) 60%,
+        transparent 80%
+      ), #ffffff;
+    transition: background 0.3s ease;
+  }
+
+  .mouse-gradient-active {
+    background: radial-gradient(
+        350px circle at var(--mouse-x, 50%) var(--mouse-y, 50%),
+        rgba(139, 92, 246, 0.1) 0%,
+        rgba(168, 85, 247, 0.08) 20%,
+        rgba(217, 70, 239, 0.06) 40%,
+        rgba(139, 92, 246, 0.03) 65%,
+        transparent 85%
+      ), #ffffff;
+  }
+
+  /* Updated hover effects with gradient borders and scale-up */
+  .hover-lift {
+    @apply rounded-2xl shadow-lg transition-all duration-200 ease-out;
+  }
+
+  .hover-lift:hover {
+    @apply scale-105 shadow-xl;
+    box-shadow: 0 20px 25px -5px rgba(139, 92, 246, 0.1), 0 10px 10px -5px rgba(168, 85, 247, 0.04);
+  }
+
+  .gradient-border {
+    @apply relative rounded-2xl;
+  }
+
+  .gradient-border::before {
+    content: "";
+    @apply absolute inset-0 rounded-2xl p-px;
+    background: linear-gradient(135deg, #8b5cf6, #a855f7, #d946ef);
+    mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+    mask-composite: xor;
+    opacity: 0;
+    transition: opacity 0.2s ease;
+  }
+
+  .gradient-border:hover::before {
+    opacity: 1;
+  }
+
+  /* Updated animations and effects */
+  @keyframes sparkle {
+    0%,
+    100% {
+      opacity: 0.4;
+      transform: scale(1);
+    }
+    50% {
+      opacity: 1;
+      transform: scale(1.1);
+    }
+  }
+
+  .ai-sparkle {
+    animation: sparkle 2s ease-in-out infinite;
+  }
+
+  @keyframes pulse-soft {
+    0%,
+    100% {
+      opacity: 1;
+    }
+    50% {
+      opacity: 0.6;
+    }
+  }
+
+  .pulse-soft {
+    animation: pulse-soft 2s ease-in-out infinite;
+  }
+
+  @keyframes slide-in-up {
+    from {
+      opacity: 0;
+      transform: translateY(20px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  .slide-in-up {
+    animation: slide-in-up 0.4s ease-out;
+  }
+
+  /* Updated glow effects with new color palette */
+  .glow-primary {
+    box-shadow: 0 0 20px rgba(139, 92, 246, 0.2);
+    transition: box-shadow 0.3s ease;
+  }
+
+  .glow-primary:hover {
+    box-shadow: 0 0 30px rgba(139, 92, 246, 0.3), 0 0 40px rgba(168, 85, 247, 0.15);
+  }
+
+  .glow-success {
+    box-shadow: 0 0 20px rgba(16, 185, 129, 0.2);
+  }
+
+  .glow-warning {
+    box-shadow: 0 0 20px rgba(245, 158, 11, 0.2);
+  }
+
+  .glow-danger {
+    box-shadow: 0 0 20px rgba(239, 68, 68, 0.2);
+  }
+}
