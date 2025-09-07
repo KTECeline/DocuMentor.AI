@@ -4,7 +4,7 @@ import { useState } from "react"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { Button } from "@/components/ui/button"
 import { Badge } from "@/components/ui/badge"
-import { Textarea } from "@/components/ui/textarea"
+import { CodePreview } from "@/components/ui/code-review"
 import { ScrollArea } from "@/components/ui/scroll-area"
 import { Separator } from "@/components/ui/separator"
 import { Alert, AlertDescription } from "@/components/ui/alert"
@@ -129,6 +129,13 @@ const aiSuggestions = [
 
 export default function DocsPage() {
   const [markdown, setMarkdown] = useState(mockMarkdown)
+  // Example old and new code for code review
+  const oldCode = `function add(a, b) {\n  return a + b;\n}`
+  const newCode = `function add(a, b) {\n  if (typeof a !== 'number' || typeof b !== 'number') {\n    throw new Error('Invalid input');\n  }\n  return a + b;\n}`
+  const reviewComments = [
+    { id: '1', line: 2, text: 'Consider input validation.', author: 'Alice', timestamp: '2h ago' },
+    { id: '2', line: 3, text: 'Good error handling!', author: 'Bob', timestamp: '1h ago' },
+  ]
   const [isOnline, setIsOnline] = useState(false)
   const [activeTab, setActiveTab] = useState<"edit" | "preview" | "split">("split")
 
@@ -365,24 +372,9 @@ export default function DocsPage() {
           gridTemplateColumns: activeTab === "edit" ? "1fr" : activeTab === "preview" ? "1fr" : "1fr 1fr",
         }}
       >
-        {/* Editor Panel */}
+        {/* Code Preview Panel */}
         {(activeTab === "edit" || activeTab === "split") && (
-          <Card className="flex flex-col">
-            <CardHeader className="pb-3">
-              <CardTitle className="text-lg flex items-center gap-2">
-                <Edit3 className="h-4 w-4" />
-                Markdown Editor
-              </CardTitle>
-            </CardHeader>
-            <CardContent className="flex-1 p-0">
-              <Textarea
-                value={markdown}
-                onChange={(e) => setMarkdown(e.target.value)}
-                className="min-h-full border-0 resize-none focus-visible:ring-0 font-mono text-sm"
-                placeholder="Start writing your documentation..."
-              />
-            </CardContent>
-          </Card>
+          <CodePreview />
         )}
 
         {/* Preview Panel */}
