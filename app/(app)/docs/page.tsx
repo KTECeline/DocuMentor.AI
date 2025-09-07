@@ -5,6 +5,7 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { Button } from "@/components/ui/button"
 import { Badge } from "@/components/ui/badge"
 import { CodePreview } from "@/components/ui/code-review"
+import { Textarea } from "@/components/ui/textarea"
 import { ScrollArea } from "@/components/ui/scroll-area"
 import { Separator } from "@/components/ui/separator"
 import { Alert, AlertDescription } from "@/components/ui/alert"
@@ -372,9 +373,46 @@ export default function DocsPage() {
           gridTemplateColumns: activeTab === "edit" ? "1fr" : activeTab === "preview" ? "1fr" : "1fr 1fr",
         }}
       >
-        {/* Code Preview Panel */}
-        {(activeTab === "edit" || activeTab === "split") && (
-          <CodePreview />
+        {/* Edit Panel */}
+        {activeTab === "edit" && (
+          <Card className="flex flex-col">
+            <CardHeader className="pb-3">
+              <CardTitle className="text-lg flex items-center gap-2">
+                <Edit3 className="h-4 w-4" />
+                Edit Documentation
+              </CardTitle>
+            </CardHeader>
+            <CardContent className="flex-1 p-0">
+              <Textarea
+                value={markdown}
+                onChange={(e) => setMarkdown(e.target.value)}
+                className="min-h-full border-0 resize-none focus-visible:ring-0 font-mono text-sm"
+                placeholder="Start editing your documentation..."
+              />
+            </CardContent>
+          </Card>
+        )}
+
+        {/* Split Panel: Code Preview + Markdown Preview */}
+        {activeTab === "split" && (
+          <>
+            <CodePreview />
+            <Card className="flex flex-col">
+              <CardHeader className="pb-3">
+                <CardTitle className="text-lg flex items-center gap-2">
+                  <Eye className="h-4 w-4" />
+                  Preview
+                </CardTitle>
+              </CardHeader>
+              <CardContent className="flex-1">
+                <ScrollArea className="h-full">
+                  <div className="prose prose-sm max-w-none">
+                    <ReactMarkdown>{markdown}</ReactMarkdown>
+                  </div>
+                </ScrollArea>
+              </CardContent>
+            </Card>
+          </>
         )}
 
         {/* Preview Panel */}
